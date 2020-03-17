@@ -1,35 +1,44 @@
 <template>
   <div class="container">
-    <h1>home</h1>
-    <button @click="jumpToNewsList">news</button>
-    <button @click="jumpToPhotoList">photo</button>
-    <button @click="jumpToGoodsList">goods</button>
-    <button @click="jumpToSearch">search</button>
-    <button @click="jumpToShopcar">shopcar</button>
+    <van-row>
+      <van-col span="24" class="header">黑马程序员.vant</van-col>
+    </van-row>
+    <router-view></router-view>
+    <van-tabbar>
+      <van-tabbar-item icon="home-o" @click="backHome">首页</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" dot>会员</van-tabbar-item>
+      <van-tabbar-item icon="shopping-cart-o" info="5" @click="jumpToShopcar"
+        >购物车</van-tabbar-item
+      >
+      <van-tabbar-item icon="search" info="20" @click="jumpToSearch"
+        >搜索</van-tabbar-item
+      >
+    </van-tabbar>
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    jumpToNewsList () {
-      this.$router.push('/newsList')
+    backHome() {
+      this.$router.push('/')
     },
-    jumpToPhotoList () {
-      this.$router.push('/photoList')
-    },
-    jumpToGoodsList () {
-      this.$router.push('/goodsList')
-    },
-    jumpToSearch () {
+    jumpToSearch() {
       this.$router.push('/search')
     },
-    jumpToShopcar () {
+    jumpToShopcar() {
       this.$router.push('/shopcar')
     }
   }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scope>
+.header {
+  background-color: #18f;
+  height: 40px;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 10px;
+}
 </style>
