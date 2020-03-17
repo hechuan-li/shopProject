@@ -7,7 +7,7 @@ import ShopCar from '../components/ShopCar.vue'
 // import NewsDetail from '../components/news/NewsDetail.vue'
 // import PhotoList from '../components/Photo/PhotoList.vue'
 // import PhotoDetail from '../components/Photo/PhotoDetail.vue'
-// import GoodsList from '../components/goods/GoodsList.vue'
+import GoodsList from '../components/goods/GoodsList.vue'
 import GoodsDetail from '../components/goods/GoodsDetail.vue'
 import GoodsInfo from '../components/goods/goodsDetails/GoodsInfo.vue'
 import GoodsComments from '../components/goods/goodsDetails/GoodsComments.vue'
@@ -23,7 +23,7 @@ const routes = [
   // { path: '/newsDetail', component: NewsDetail },
   // { path: '/photoList', component: PhotoList },
   // { path: '/photoDetail', component: PhotoDetail },
-  // { path: '/goodsList', component: GoodsList },
+  { path: '/goodsList', component: GoodsList },
   { path: '/goodsdetail/:id', component: GoodsDetail },
   { path: '/goodsinfo/:id', component: GoodsInfo },
   { path: '/goodscomments/:id', component: GoodsComments }
