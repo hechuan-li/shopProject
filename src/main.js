@@ -5,8 +5,12 @@ import router from './router'
 import store from './assets/js/shop_car_store'
 // 按需导入 vant ui
 import './assets/js/vant-import'
+// 导入 axios
+import axios from 'axios'
 
 Vue.config.productionTip = false
+axios.defaults.baseURL = 'http://www.liulongbin.top:3005/'
+Vue.prototype.$http = axios
 
 new Vue({
   router,
