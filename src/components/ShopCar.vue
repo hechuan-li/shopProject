@@ -1,27 +1,36 @@
 <template>
-  <div style="padding: 10px 0">
-    <!-- 购物车商品列表 -->
-    <div v-if="$store.state.goods.length !== 0">
-      <van-card
-        v-for="(item, i) in shopCarList"
-        :key="i"
-        :num="item.buy_num"
-        :price="item.sell_price"
-        :title="item.title">
-        <template v-slot:thumb>
-          <a href="javascript:;" @click="handleToGoodsDerail(i)"><img :src="item.thumb_path" style="width: 90px"></a>
-        </template>
-        <template v-slot:footer>
-          <div>
-            <van-stepper v-model="item.buy_num" min="1" />
-          </div>
-        </template>
-      </van-card>
-    </div>
-    <!-- 购物车为空时可跳转到商品列表页按钮 -->
-    <div style="padding: 260px 0; text-align: center" v-else @click="handleToGoodsList">
-      <van-button plain type="warning">购物车空了, 去添加~~~</van-button>
-    </div>
+  <div style="padding: 10px">
+    <van-pull-refresh @refresh="onRefresh" v-model="isLoading">
+      <!-- 购物车商品列表 -->
+      <div v-if="$store.state.goods.length !== 0" >
+        <van-swipe-cell v-for="(item, i) in shopCarList" :key="i">
+          <van-card
+            :num="item.buy_num"
+            :price="item.sell_price"
+            :title="item.title">
+            <template v-slot:thumb>
+              <a href="javascript:;" @click="handleToGoodsDerail(i)"><img :src="item.thumb_path" style="width: 90px"></a>
+            </template>
+            <template v-slot:footer>
+              <div>
+                <van-stepper v-model="item.buy_num" min="1" />
+              </div>
+            </template>
+          </van-card>
+          <van-button
+          slot="right"
+          square
+          text="删除"
+          type="danger"
+          class="delete-button"
+          @click="handleGoodsDelete(i)"/>
+        </van-swipe-cell>
+      </div>
+      <!-- 购物车为空时可跳转到商品列表页按钮 -->
+      <div style="padding: 260px 0; text-align: center" v-else @click="handleToGoodsList">
+        <van-button plain type="warning">购物车空了, 去添加~~~</van-button>
+      </div>
+    </van-pull-refresh>
     <!-- 订单提交按钮 -->
     <van-submit-bar
       :price="total * 100"
@@ -34,7 +43,8 @@
 export default {
   data() {
     return {
-      shopCarList: []
+      shopCarList: [],
+      isLoading: false
     }
   },
   computed: {
@@ -74,6 +84,16 @@ export default {
     // 点击图片跳转到商品详情页
     handleToGoodsDerail (i) {
       this.$router.push('/goodsdetail/' + this.$store.state.goods[i].goodsId)
+    },
+    // 下拉刷新
+    onRefresh () {
+      this.getShopCarInfo()
+      this.isLoading = false
+    },
+    // 删除商品
+    handleGoodsDelete (i) {
+      this.$store.commit('decrease', i)
+      this.getShopCarInfo()
     }
   }
 }
@@ -86,5 +106,11 @@ export default {
 }
 .van-card__content {
   justify-content: start
+}
+.van-button {
+  height: 100%;
+}
+.van-swipe-cell {
+  margin-bottom: 10px;
 }
 </style>

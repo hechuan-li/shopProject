@@ -14,6 +14,9 @@ export default new Vuex.Store({
       } else {
         state.goods.splice(i, 1, good)
       }
+    },
+    decrease (state, i) {
+      state.goods.splice(i, 1)
     }
   },
   getters: {

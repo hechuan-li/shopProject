@@ -10,7 +10,9 @@ import {
   Field,
   Notify,
   Card,
-  SubmitBar
+  SubmitBar,
+  PullRefresh,
+  SwipeCell
 } from 'vant'
 
 Vue.use(Swipe)
@@ -23,3 +25,5 @@ Vue.use(Field)
 Vue.use(Notify)
 Vue.use(Card)
 Vue.use(SubmitBar)
+Vue.use(PullRefresh)
+Vue.use(SwipeCell)
