@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>newsDetail</h1>
+    <h1>newsDetail+{{id}}</h1>
   </div>
 </template>
 
