@@ -33,8 +33,8 @@
         <p>库存情况: </p>
         <p>上架时间: </p>
       </div>
-      <van-button plain type="info" block>图文介绍</van-button>
-      <van-button plain type="danger" block>商品评论</van-button>
+      <van-button plain type="info" block @click="handleToGoodsInfo">图文介绍</van-button>
+      <van-button plain type="danger" block @click="handleToGoodsComments">商品评论</van-button>
     </div>
   </div>
 </template>
@@ -53,6 +53,12 @@ export default {
   },
   methods: {
     getGoodsDetail () {
+    },
+    handleToGoodsInfo () {
+      this.$router.push('/goodsinfo')
+    },
+    handleToGoodsComments () {
+      this.$router.push('/goodscomments')
     }
   }
 }
