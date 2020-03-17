@@ -5,13 +5,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count: 0
+    goods: []
   },
   mutations: {
-    increment (state) {
-      state.count++
+    increment (state, { good, i }) {
+      if (i === -1) {
+        state.goods.push(good)
+      } else {
+        state.goods.splice(i, 1, good)
+      }
     }
   },
-  actions: {
+  getters: {
+    ids: state => {
+      const ids = []
+      state.goods.forEach(item => {
+        ids.push(item.goodsId)
+      })
+      return ids.toString()
+    }
   }
 })
