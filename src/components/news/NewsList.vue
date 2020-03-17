@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     jumpToNewsDetail (id) {
-      this.$router.push('/newsDetail/id')
+      this.$router.push('/newsDetail?' + id)
     },
     // 获取所有新闻资讯列表
     async getNewList() {
