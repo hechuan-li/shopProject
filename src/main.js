@@ -4,6 +4,8 @@ import router from './router'
 import axios from 'axios'
 
 Vue.config.productionTip = false
+axios.defaults.baseURL = 'http://www.liulongbin.top:3005/'
+Vue.prototype.$http = axios
 
 axios.defaults.baseURL = 'http://www.liulongbin.top:3005/'
 Vue.prototype.$http = axios
