@@ -63,7 +63,8 @@ export default {
     },
     // 图片点击事件
     imgClick(id) {
-      this.$router.push(`/photoDetail/${id}`)
+      // this.$router.push(`/photoDetail/${id}`)
+      this.$router.push({ path: '/photoDetail', query: { id: id } })
     }
   }
 }
