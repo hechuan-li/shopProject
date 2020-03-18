@@ -63,7 +63,6 @@ export default {
     // 点击事件
     clickEvent(id) {
       this.$router.push({ path: '/goodsDetail/', query: { id: id } })
-      console.log(id)
     },
     onLoad() {
       setTimeout(async () => {

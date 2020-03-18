@@ -28,14 +28,17 @@
       </div>
       <!-- 购物车为空时可跳转到商品列表页按钮 -->
       <div style="padding: 260px 0; text-align: center" v-else @click="handleToGoodsList">
+
         <van-button plain type="warning">购物车空了, 去添加~~~</van-button>
       </div>
     </van-pull-refresh>
     <!-- 订单提交按钮 -->
+
     <van-submit-bar
       :price="total * 100"
       button-text="提交订单"
-      @submit="onSubmit"/>
+      @submit="onSubmit">
+       <van-icon name='arrow-left' @click="backHome">返回</van-icon></van-submit-bar>
   </div>
 </template>
 
@@ -97,6 +100,9 @@ export default {
       console.log(id)
       this.$store.commit('decrease', id)
       this.getShopCarInfo()
+    },
+    backHome () {
+      this.$router.push('/')
     }
   }
 }
