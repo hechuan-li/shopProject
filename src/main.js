@@ -9,8 +9,9 @@ import store from './assets/js/shop_car_store'
 import './assets/js/vant-import'
 // 导入 axios
 import axios from 'axios'
-import Vant from 'vant'
+// import Vant from 'vant'
 import 'vant/lib/index.css'
+import Vant from 'vant/lib/vant.js'
 
 Vue.use(Vant)
 Vue.config.productionTip = false
