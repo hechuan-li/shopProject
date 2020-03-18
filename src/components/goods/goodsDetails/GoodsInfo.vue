@@ -14,7 +14,7 @@ export default {
   },
   computed: {
     goodsId () {
-      return this.$route.params.id
+      return this.$route.query.id
     }
   },
   created () {

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <van-row>
-      <van-col span="24" class="header">黑马程序员.vant</van-col>
+      <van-col span="24" class="header" @click="backHome">黑马程序员.vant</van-col>
     </van-row>
     <router-view></router-view>
     <van-tabbar>

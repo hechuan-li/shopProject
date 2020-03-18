@@ -1,12 +1,14 @@
 <template>
     <div>
       <!-- 下拉刷新功能 -->
-      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-      <div class="parentBox">
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+        <!-- 上拉刷新 -->
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+        <div class="parentBox">
         <van-card v-for="item in goodsList" :key="item.id" @click="clickEvent(item.id)">
         <!-- 图片区 -->
         <div slot="thumb" class="imgBox">
-         <img :src="item.img_url" alt="">
+         <img v-lazy="item.img_url">
         </div>
         <!-- 商品描述 -->
         <div slot="desc" class="describeBox">
@@ -27,6 +29,7 @@
         <!-- 标签 -->
       </van-card>
       </div>
+      </van-list>
       </van-pull-refresh>
     </div>
 </template>
@@ -35,33 +38,58 @@
 export default {
   data() {
     return {
-      isLoading: true,
-      num: 60,
-      goodsList: []
+      // 上拉页面配置属性
+      refreshing: false,
+      // 商品列表
+      goodsList: [],
+      // 请求数据
+      num: 1,
+      // 下拉页面配置属性
+      loading: false,
+      finished: false
     }
   },
   created() {
     this.getList()
   },
   methods: {
-    // 页面刷新时触发事件
-    onRefresh() {
-      this.$toast.success('刷新成功')
-      this.isLoading = false
-      this.getList()
-    },
     // 获取数据
     async getList() {
-      const { data: res } = await this.$http.get('/api/getgoods')
+      const { data: res } = await this.$http.get('/api/getgoods?pageindex=1')
       if (res.status === 0) {
         this.goodsList = res.message
       }
-      console.log(this.goodsList)
     },
     // 点击事件
     clickEvent(id) {
-      this.$router.push('/goodsDetail/' + id)
+      this.$router.push({ path: '/goodsDetail/', query: { id: id } })
       console.log(id)
+    },
+    onLoad() {
+      setTimeout(async () => {
+        if (this.refreshing) {
+          this.goodsList = []
+          this.refreshing = false
+        }
+        this.num = this.num + 1
+        const { data: res } = await this.$http.get(
+          '/api/getgoods?pageindex=' + this.num
+        )
+        if (res.status === 0) {
+          this.goodsList.push(...res.message)
+        }
+        this.loading = false
+
+        if (this.num >= 2) {
+          this.finished = true
+        }
+      }, 1000)
+    },
+    onRefresh() {
+      setTimeout(() => {
+        this.$toast('刷新成功')
+        this.refreshing = false
+      }, 1000)
     }
   }
 }

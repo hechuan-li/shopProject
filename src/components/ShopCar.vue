@@ -9,7 +9,7 @@
             :price="item.sell_price"
             :title="item.title">
             <template v-slot:thumb>
-              <a href="javascript:;" @click="handleToGoodsDerail(i)"><img :src="item.thumb_path" style="width: 90px"></a>
+              <a href="javascript:;" @click="handleToGoodsDetail(item.id)"><img :src="item.thumb_path" style="width: 90px"></a>
             </template>
             <template v-slot:footer>
               <div>
@@ -23,7 +23,7 @@
           text="删除"
           type="danger"
           class="delete-button"
-          @click="handleGoodsDelete(i)"/>
+          @click="handleGoodsDelete(item.id)"/>
         </van-swipe-cell>
       </div>
       <!-- 购物车为空时可跳转到商品列表页按钮 -->
@@ -64,11 +64,13 @@ export default {
     async getShopCarInfo () {
       if (this.$store.state.goods.length === 0) return
       const ids = this.$store.getters.ids
+      console.log(ids)
       const { data: res } = await this.$http.get('/api/goods/getshopcarlist/' + ids)
       res.message.forEach((item, i) => {
         item.buy_num = this.$store.state.goods[i].buy_num
       })
       this.shopCarList = res.message
+      console.log(this.shopCarList)
     },
     // 提交订单
     onSubmit () {
@@ -82,8 +84,8 @@ export default {
       this.$router.push('/goodsList')
     },
     // 点击图片跳转到商品详情页
-    handleToGoodsDerail (i) {
-      this.$router.push('/goodsdetail/' + this.$store.state.goods[i].goodsId)
+    handleToGoodsDetail (id) {
+      this.$router.push('/goodsdetail/' + id)
     },
     // 下拉刷新
     onRefresh () {
@@ -91,8 +93,9 @@ export default {
       this.isLoading = false
     },
     // 删除商品
-    handleGoodsDelete (i) {
-      this.$store.commit('decrease', i)
+    handleGoodsDelete (id) {
+      console.log(id)
+      this.$store.commit('decrease', id)
       this.getShopCarInfo()
     }
   }

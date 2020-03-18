@@ -22,7 +22,7 @@
         {{item.content}}
       </div>
     </div>
-    <van-button plain type="danger" block style="margin: 20px 0" @click="getMoreGoodsComments" v-if="state === 0">加载更多</van-button>
+    <van-button class="loadMore" plain type="danger" block style="margin: 20px 0" @click="getMoreGoodsComments" v-if="state === 0">加载更多</van-button>
     <p style="text-align: center" v-else>没有更多评论了~~~</p>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     goodsId () {
-      return this.$route.params.id
+      return this.$route.query.id
     }
   },
   created () {

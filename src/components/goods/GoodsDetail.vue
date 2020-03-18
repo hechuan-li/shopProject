@@ -52,29 +52,28 @@ export default {
     }
   },
   created () {
+    this.targetGoods.goodsId = this.$route.query.id
     this.getGoodsDetail()
     this.getGoodsImgs()
   },
   methods: {
     // 获取商品详情
     async getGoodsDetail () {
-      this.targetGoods.goodsId = this.$route.params.id
       const { data: res } = await this.$http.get('/api/goods/getinfo/' + this.targetGoods.goodsId)
       this.goodsDetail = res.message[0]
     },
     // 获取商品图片
     async getGoodsImgs () {
-      this.targetGoods.goodsId = this.$route.params.id
       const { data: res } = await this.$http.get('/api/getthumimages/' + this.targetGoods.goodsId)
       this.goodsImgs = res.message
     },
     // 跳转到图文介绍页
     handleToGoodsInfo () {
-      this.$router.push('/goodsinfo/' + this.targetGoods.goodsId)
+      this.$router.push({ path: '/goodsInfo', query: { id: this.targetGoods.goodsId } })
     },
     // 跳转到商品评论页
     handleToGoodsComments () {
-      this.$router.push('/goodscomments/' + this.targetGoods.goodsId)
+      this.$router.push({ path: '/goodscomments', query: { id: this.targetGoods.goodsId } })
     },
     // 添加商品到购物车
     handleAddGoodsToShopCar () {
