@@ -102,5 +102,6 @@ export default {
   background-color: #cccccc;
   height: 40px;
   line-height: 40px;
+  font-size: 14px;
 }
 </style>
