@@ -10,6 +10,9 @@ import PhotoList from '../components/Photo/PhotoList.vue'
 import PhotoDetail from '../components/Photo/PhotoDetail.vue'
 import GoodsList from '../components/goods/GoodsList.vue'
 import GoodsDetail from '../components/goods/GoodsDetail.vue'
+// import Home from '../components/Home.vue'
+import GoodsInfo from '../components/goods/goodsDetails/GoodsInfo.vue'
+import GoodsComments from '../components/goods/goodsDetails/GoodsComments.vue'
 
 Vue.use(VueRouter)
 
@@ -27,7 +30,9 @@ const routes = [
       { path: '/photoList', component: PhotoList },
       { path: '/photoDetail', component: PhotoDetail },
       { path: '/goodsList', component: GoodsList },
-      { path: '/goodsDetail', component: GoodsDetail }
+      { path: '/goodsDetail', component: GoodsDetail },
+      { path: '/goodsInfo', component: GoodsInfo },
+      { path: '/goodsComments', component: GoodsComments }
     ]
   }
 
