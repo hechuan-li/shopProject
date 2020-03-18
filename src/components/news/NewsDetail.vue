@@ -1,6 +1,6 @@
 <template>
-  <div class="container">    
-        <h1 class="title">{{newsDetail.title}}</h1>
+  <div class="container">
+        <h3>{{newsDetail.title}}</h3>
          <div class="small">
            <span>发表时间: {{newsDetail.add_time}}</span>
            <span>点击次数: {{newsDetail.click}}</span>
@@ -70,6 +70,7 @@ export default {
       if (res.status === 0) {
         this.$notify({ type: 'success', message: '添加成功' })
       }
+      this.message = ''
     }
   },
   computed: {
@@ -98,8 +99,5 @@ export default {
   height: 40px;
   line-height: 40px;
   font-size: 14px;
-}
-.title {
-   color: #1989fa;
 }
 </style>
