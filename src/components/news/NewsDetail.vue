@@ -1,12 +1,10 @@
 <template>
-  <div class="container">
-       <div class="header">
-        <h1>{{newsDetail.title}}</h1>
+  <div class="container">    
+        <h1 class="title">{{newsDetail.title}}</h1>
          <div class="small">
            <span>发表时间: {{newsDetail.add_time}}</span>
            <span>点击次数: {{newsDetail.click}}</span>
          </div>
-       </div>
        <hr>
        <div class="content" v-html="newsDetail.content">
               {{newsDetail.content}}
@@ -93,9 +91,6 @@ export default {
   display: flex;
   justify-content: space-between;
   font-size: 8px;
-}
-.header {
-  text-align: center;
   color: #1989fa;
 }
 .first {
@@ -103,5 +98,8 @@ export default {
   height: 40px;
   line-height: 40px;
   font-size: 14px;
+}
+.title {
+   color: #1989fa;
 }
 </style>
