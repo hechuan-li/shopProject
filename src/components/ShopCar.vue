@@ -2,14 +2,17 @@
   <div style="padding: 10px">
     <van-pull-refresh @refresh="onRefresh" v-model="isLoading">
       <!-- 购物车商品列表 -->
-      <div v-if="$store.state.goods.length !== 0" >
+      <div v-if="$store.state.goods.length !== 0">
         <van-swipe-cell v-for="(item, i) in shopCarList" :key="i">
           <van-card
             :num="item.buy_num"
             :price="item.sell_price"
-            :title="item.title">
+            :title="item.title"
+          >
             <template v-slot:thumb>
-              <a href="javascript:;" @click="handleToGoodsDetail(item.id)"><img :src="item.thumb_path" style="width: 90px"></a>
+              <a href="javascript:;" @click="handleToGoodsDetail(item.id)"
+                ><img :src="item.thumb_path" style="width: 90px"
+              /></a>
             </template>
             <template v-slot:footer>
               <div>
@@ -18,17 +21,21 @@
             </template>
           </van-card>
           <van-button
-          slot="right"
-          square
-          text="删除"
-          type="danger"
-          class="delete-button"
-          @click="handleGoodsDelete(item.id)"/>
+            slot="right"
+            square
+            text="删除"
+            type="danger"
+            class="delete-button"
+            @click="handleGoodsDelete(item.id)"
+          />
         </van-swipe-cell>
       </div>
       <!-- 购物车为空时可跳转到商品列表页按钮 -->
-      <div style="padding: 260px 0; text-align: center" v-else @click="handleToGoodsList">
-
+      <div
+        style="padding: 260px 0; text-align: center"
+        v-else
+        @click="handleToGoodsList"
+      >
         <van-button plain type="warning">购物车空了, 去添加~~~</van-button>
       </div>
     </van-pull-refresh>
@@ -37,8 +44,12 @@
     <van-submit-bar
       :price="total * 100"
       button-text="提交订单"
-      @submit="onSubmit">
-       <van-icon name='arrow-left' @click="backHome">返回</van-icon></van-submit-bar>
+      @submit="onSubmit"
+    >
+      <van-icon name="arrow-left" @click="backHome"
+        >返回</van-icon
+      ></van-submit-bar
+    >
   </div>
 </template>
 
@@ -47,11 +58,12 @@ export default {
   data() {
     return {
       shopCarList: [],
-      isLoading: false
+      isLoading: false,
+      goodsItem: ''
     }
   },
   computed: {
-    total () {
+    total() {
       let total = 0
       this.shopCarList.forEach(item => {
         total += item.sell_price * item.buy_num
@@ -59,49 +71,50 @@ export default {
       return total
     }
   },
-  created () {
+  created() {
     this.getShopCarInfo()
   },
   methods: {
     // 获取购物车信息
-    async getShopCarInfo () {
+    async getShopCarInfo() {
       if (this.$store.state.goods.length === 0) return
       const ids = this.$store.getters.ids
-      console.log(ids)
-      const { data: res } = await this.$http.get('/api/goods/getshopcarlist/' + ids)
+      const { data: res } = await this.$http.get(
+        '/api/goods/getshopcarlist/' + ids
+      )
+
+      this.goodsItem = res.message.length
       res.message.forEach((item, i) => {
         item.buy_num = this.$store.state.goods[i].buy_num
       })
       this.shopCarList = res.message
-      console.log(this.shopCarList)
     },
     // 提交订单
-    onSubmit () {
+    onSubmit() {
       this.$toast({
         message: 'I know you have not money~~',
         icon: 'like-o'
       })
     },
     // 购物车为空时可跳转到商品列表页
-    handleToGoodsList () {
+    handleToGoodsList() {
       this.$router.push('/goodsList')
     },
     // 点击图片跳转到商品详情页
-    handleToGoodsDetail (id) {
+    handleToGoodsDetail(id) {
       this.$router.push('/goodsdetail/' + id)
     },
     // 下拉刷新
-    onRefresh () {
+    onRefresh() {
       this.getShopCarInfo()
       this.isLoading = false
     },
     // 删除商品
-    handleGoodsDelete (id) {
-      console.log(id)
+    handleGoodsDelete(id) {
       this.$store.commit('decrease', id)
       this.getShopCarInfo()
     },
-    backHome () {
+    backHome() {
       this.$router.push('/')
     }
   }
@@ -114,7 +127,7 @@ export default {
   color: red;
 }
 .van-card__content {
-  justify-content: start
+  justify-content: start;
 }
 .van-button {
   height: 100%;

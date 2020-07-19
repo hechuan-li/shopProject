@@ -38,13 +38,11 @@ export default {
   created() {
     this.getcomments()
     this.getnewsDet()
-    console.log(this.newsID)
   },
   methods: {
     async getnewsDet() {
       const { data: res } = await this.$http.get(`/api/getnew/${this.newsID}`)
       this.newsDetail = res.message[0]
-      console.log(this.newsDetail)
       this.newsDetail.add_time = this.newsDetail.add_time.substring(0, 10)
     },
     async getcomments() {

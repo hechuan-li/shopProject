@@ -34,10 +34,8 @@ export default {
   methods: {
     async onSearch() {
       const { data: res } = await this.$http.get('/api/getprodlist')
-      console.log(res)
       this.goodsList = res.message
       this.searchhistory.push(this.value)
-      console.log(this.searchhistory)
     },
     onCancel() {
       this.goodsList = []

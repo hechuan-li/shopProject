@@ -8,27 +8,27 @@
     <van-grid :gutter="10" :column-num="2">
       <van-grid-item @click="jumpToNewsList">
         <img :src='icons.icon1' class="iconImg" />
-        <p>新闻资讯</p>
+        <p>News</p>
       </van-grid-item>
       <van-grid-item @click="jumpToPhotoList">
         <img :src='icons.icon2'  class="iconImg" />
-        <p>图片分享</p>
+        <p>Pictures</p>
       </van-grid-item>
       <van-grid-item @click="jumpToGoodsList">
         <img :src='icons.icon3'  class="iconImg" />
-        <p>商品购买</p>
+        <p>Go Shopping</p>
       </van-grid-item>
       <van-grid-item @click="jumpToNewsList">
         <img :src='icons.icon4'  class="iconImg" />
-        <p>留言反馈</p>
+        <p>Feedback</p>
       </van-grid-item>
       <van-grid-item @click="jumpToNewsList">
         <img :src='icons.icon5'  class="iconImg" />
-        <p>视频专区</p>
+        <p>Videos</p>
       </van-grid-item>
       <van-grid-item @click="jumpToNewsList">
         <img :src='icons.icon6'  class="iconImg" />
-        <p>联系我们</p>
+        <p>Contact Us</p>
       </van-grid-item>
     </van-grid>
   </div>

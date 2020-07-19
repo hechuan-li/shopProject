@@ -10,7 +10,6 @@ import PhotoList from '../components/Photo/PhotoList.vue'
 import PhotoDetail from '../components/Photo/PhotoDetail.vue'
 import GoodsList from '../components/goods/GoodsList.vue'
 import GoodsDetail from '../components/goods/GoodsDetail.vue'
-// import Home from '../components/Home.vue'
 import GoodsInfo from '../components/goods/goodsDetails/GoodsInfo.vue'
 import GoodsComments from '../components/goods/goodsDetails/GoodsComments.vue'
 

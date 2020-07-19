@@ -8,8 +8,8 @@
         <p>{{item.title}} </p>
       </div>
       <div slot="bottom" class="btm">
-        <p>发表时间:{{item.add_time}} </p>
-         <p class="btm1">点赞:{{item.click}} </p>
+        <p>Publish date:{{item.add_time}} </p>
+         <p class="btm1">Like: {{item.click}} </p>
       </div>
    </van-card>
    <!-- 新闻资讯列表end -->

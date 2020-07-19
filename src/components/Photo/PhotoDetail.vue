@@ -76,7 +76,6 @@ export default {
   methods: {
     async getPhotoInfo() {
       const { data: res } = await this.$http.get(`api/getimageInfo/${this.id}`)
-      console.log(res)
 
       if (res.status !== 0) {
         return false
@@ -85,14 +84,12 @@ export default {
     },
     async getImages() {
       const { data: res } = await this.$http.get(`api/getthumimages/${this.id}`)
-      console.log(res)
       if (res.status !== 0) {
         return false
       }
       for (let index = 0; index < res.message.length; index++) {
         this.images.push(res.message[index].src)
       }
-      console.log(this.images)
     },
     async getcomments() {
       const { data: res } = await this.$http.get(
@@ -115,7 +112,6 @@ export default {
         }
       )
       if (res.status === 0) {
-        // this.$notify({ type: 'success', message: '添加成功' })
         alert('添加成功')
       }
     },
